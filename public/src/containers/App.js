@@ -8,9 +8,10 @@ import Footer from '../components/Footer'
 class App extends Component {
   render() {
     // Injected by connect() call:
-    const { dispatch, visibleTodos, visibilityFilter } = this.props
+    const { dispatch, visibleTodos, visibilityFilter, children } = this.props
     return (
       <div>
+      {children}
         <AddTodo
           onAddClick={text =>
             dispatch(addTodo(text))
@@ -25,6 +26,7 @@ class App extends Component {
           onFilterChange={nextFilter =>
             dispatch(setVisibilityFilter(nextFilter))
           } />
+          
       </div>
     )
   }
@@ -39,7 +41,8 @@ App.propTypes = {
     'SHOW_ALL',
     'SHOW_COMPLETED',
     'SHOW_ACTIVE'
-  ]).isRequired
+  ]).isRequired,
+  children: PropTypes.object
 }
 
 function selectTodos(todos, filter) {

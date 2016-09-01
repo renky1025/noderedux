@@ -1,16 +1,30 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import App from './containers/App'
-import todoApp from './reducers/reducers'
+import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader';
+import configureStore from './store/configureStore';
+import Root from './containers/Root';
 
-let store = createStore(todoApp);
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
-let rootElement = document.getElementById('root')
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  rootElement
-)
+    <AppContainer>
+        <Root store={store} history={history} />
+    </AppContainer>,
+    document.getElementById('root')
+);
+
+if (module.hot) {
+    module.hot.accept('./containers/Root', () => {
+        const NewRoot = require('./containers/Root').default;
+        render(
+            <AppContainer>
+                <NewRoot store={store} history={history} />
+            </AppContainer>,
+            document.getElementById('root')
+        );
+    });
+}

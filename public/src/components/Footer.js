@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router';
 
 export default class Footer extends Component {
   renderFilter(filter, name) {
@@ -26,7 +27,8 @@ export default class Footer extends Component {
         {this.renderFilter('SHOW_COMPLETED', 'Completed')}
         {', '}
         {this.renderFilter('SHOW_ACTIVE', 'Active')}
-        .
+        <br />
+        <Link to="/about">About</Link>
       </p>
     )
   }
