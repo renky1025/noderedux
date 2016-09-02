@@ -7,9 +7,9 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: ['react-hot-loader/patch','./public/src/index'],
   output: {
-    path: path.join(__dirname, 'public/dist'),
+    path: path.join(__dirname, '/public/dist'),
     filename: 'bundle.js',
-    publicPath: 'public/dist'
+    publicPath: '/public/dist'
   },
   resolve: {
     extensions: ['', '.js', '.jsx',".css",".less"]
